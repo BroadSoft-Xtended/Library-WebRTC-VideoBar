@@ -1,1 +1,1 @@
-module.exports = {view: require('./lib/views/videobar')};
+module.exports = {view: require('./lib/views/videobar'), model: require('./lib/models/videobar')};

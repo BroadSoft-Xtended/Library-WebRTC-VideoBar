@@ -113,16 +113,27 @@
 
   .videoBar .hold, .videoBar .resume
     margin-top -1px
-    
-  .started .hangup, .calling .hangup
+
+  .videoBar .settings
+    margin-top 12px !important
+    .icon-settings
+      margin 0
+      font-size 18px
+      color #FFF
+      
+  .videoBar.started .hangup, 
+  .videoBar.calling .hangup
   .videoBar:not(.held).enableHold.started .hold,
-  .enableHold.started.held .resume,
-  .enableSettings .settings
+  .videoBar.enableHold.started.held .resume,
+  .videoBar.enableSettings .settings
     {fadeIn}
     
-  .connected .hangup, .disconnected .hangup,
-  .videoBar.held .hold, .videoBar:not(.started) .hold,
-  .videoBar:not(.held) .resume, .videoBar:not(.started) .resume
+  .videoBar.connected .hangup, 
+  .videoBar.disconnected .hangup,
+  .videoBar.held .hold, 
+  .videoBar:not(.started) .hold,
+  .videoBar:not(.held) .resume, 
+  .videoBar:not(.started) .resume
     {fadeOut}  
     
   .videoBar:not(.enableMute) .cell-muteAudio,

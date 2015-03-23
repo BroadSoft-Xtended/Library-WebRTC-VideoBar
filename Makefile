@@ -4,10 +4,13 @@ PATH := node_modules/.bin:$(PATH)
 JADE_FILES := $(shell glob-cli "templates/**/*.jade")
 STYLUS_FILES := $(shell glob-cli "styles/**/*.styl")
 
-all: node_modules/bdsft-webrtc-templates.js node_modules/bdsft-webrtc-styles.js node_modules/views
+all: node_modules/bdsft-webrtc-templates.js node_modules/bdsft-webrtc-styles.js node_modules/views node_modules/models
 
 node_modules/views: lib/views
 	ln -sf ../lib/views node_modules/views
+
+node_modules/models: lib/models
+	ln -sf ../lib/views node_modules/models
 
 ## Compile styles ##################################################################
 styles/css: $(STYLUS_FILES)

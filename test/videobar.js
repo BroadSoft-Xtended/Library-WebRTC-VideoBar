@@ -19,7 +19,6 @@ describe('videobar', function() {
       videobar: require('../'),
       timer: require('webrtc-timer')
     });
-    testUA.appendView(videobarview);
   });
 
   it('hold icon:', function() {
