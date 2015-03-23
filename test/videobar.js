@@ -19,13 +19,7 @@ describe('videobar', function() {
       videobar: require('../'),
       timer: require('webrtc-timer')
     });
-    var div = document.createElement("div");
-    var div2 = document.createElement("div");
-    div.className = 'bdsft-client';
-    div2.className = 'client';
-    document.body.appendChild(div);
-    div.appendChild(div2);
-    div2.appendChild(videobarview.view[0]);
+    testUA.appendView(videobarview);
   });
 
   it('hold icon:', function() {
@@ -102,4 +96,12 @@ describe('videobar', function() {
     testUA.endCall();
     testUA.isVisible(videobarview.resume.element, false);
   });
+  it('settings icon', function() {
+    configuration.enableSettings = true;
+    testUA.isVisible(videobarview.settings, true);
+  });
+  it('settings icon with enableSettings = false', function() {
+    configuration.enableSettings = false;
+    testUA.isVisible(videobarview.settings, false);
+  });  
 });
