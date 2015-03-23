@@ -73,32 +73,30 @@
       width auto
       background-color transparent
 
-  .view-audioOnly .videoBar
+  .videoBar.audioOnly
     display inline-block
     width auto
     
-  .view-audioOnly
-    .videoBar
-      .table
-        table-layout auto
-        width auto
+  .videoBar.audioOnly
+    .table
+      table-layout auto
+      width auto
     .cell-hangup
       width 35px !important
       
-  .view-conference
+  .videoBar.conference
     .cell-hangup
       width 30px !important
       top 2px
-    .videoBar
-      .cell
-        .hangup
-          margin-top 0
-          width 140px
-          background-color red
-          border-radius 5px
-          margin-left 10px
-          height 36px
-          line-height 14px
+    .cell
+      .hangup
+        margin-top 0
+        width 140px
+        background-color red
+        border-radius 5px
+        margin-left 10px
+        height 36px
+        line-height 14px
     .hangup
       .subtitle
         display block !important

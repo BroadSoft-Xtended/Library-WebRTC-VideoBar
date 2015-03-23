@@ -22,6 +22,11 @@ describe('videobar', function() {
     });
   });
 
+  it('with audioOnly', function() {
+    configuration.view = 'audioOnly';
+    expect(videobar.classes.indexOf('audioOnly')).toNotEqual(-1);
+    configuration.view = '';
+  });
   it('hold icon:', function() {
     testUA.isVisible(videobarview.hold.element, false);
   });
