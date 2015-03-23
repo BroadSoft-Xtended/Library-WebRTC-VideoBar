@@ -4,7 +4,7 @@ jsdom({});
 
 describe('videobar', function() {
 
-  beforeEach(function() {
+  before(function() {
     core = require('webrtc-core');
     testUA = core.testUA;
     ExSIP = core.exsip;
@@ -38,27 +38,32 @@ describe('videobar', function() {
     configuration.enableHold = false;
     testUA.startCall();
     testUA.isVisible(videobarview.hold.element, false);
+    testUA.endCall();
   });
   it('hold icon on call started with enableHold is true', function() {
     configuration.enableHold = true;
     testUA.startCall();
     testUA.isVisible(videobarview.hold.element, true);
+    testUA.endCall();
   });
   it('resume icon on call started with enableHold is false', function() {
     configuration.enableHold = false;
     testUA.startCall();
     testUA.isVisible(videobarview.resume.element, false);
+    testUA.endCall();
   });
   it('resume icon on call started with enableHold is true', function() {
     configuration.enableHold = true;
     testUA.startCall();
     testUA.isVisible(videobarview.resume.element, false);
+    testUA.endCall();
   });
   it('hold icon after call held', function() {
     configuration.enableHold = true;
     testUA.startCall();
     videobarview.hold.element.trigger("click");
     testUA.isVisible(videobarview.hold.element, false);
+    testUA.endCall();
   });
   it('resume icon after call held', function() {
     configuration.enableHold = true;
@@ -66,6 +71,7 @@ describe('videobar', function() {
     videobarview.hold.element.trigger("click");
     expect(videobarview.hold.disabled).toEqual(false);
     testUA.isVisible(videobarview.resume.element, true);
+    testUA.endCall();
   });
   it('hold icon after call resumed', function() {
     configuration.enableHold = true;
@@ -74,6 +80,7 @@ describe('videobar', function() {
     videobarview.resume.element.trigger("click");
     expect(videobarview.resume.disabled).toEqual(false);
     testUA.isVisible(videobarview.hold.element, true);
+    testUA.endCall();
   });
   it('resume icon after call resumed', function() {
     configuration.enableHold = true;
@@ -81,8 +88,10 @@ describe('videobar', function() {
     videobarview.hold.element.trigger("click");
     videobarview.resume.element.trigger("click");
     testUA.isVisible(videobarview.resume.element, false);
+    testUA.endCall();
   });
   it('hold icon on call ended', function() {
+    configuration.enableHold = true;
     testUA.startCall();
     testUA.endCall();
     testUA.isVisible(videobarview.hold.element, false);

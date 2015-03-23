@@ -115,21 +115,23 @@
     margin-top -1px
     
   .started .hangup, .calling .hangup
+  .videoBar:not(.held).enableHold.started .hold,
+  .enableHold.started.held .resume
     {fadeIn}
     
   .connected .hangup, .disconnected .hangup,
-  .client.held .hold, .client:not(.started) .hold,
-  .client:not(.held) .resume, .client:not(.started) .resume
+  .videoBar.held .hold, .videoBar:not(.started) .hold,
+  .videoBar:not(.held) .resume, .videoBar:not(.started) .resume
     {fadeOut}  
     
-  .client:not(.enableMute) .cell-muteAudio,
-  .client:not(.enableTransfer) .cell-transfer,
-  .client:not(.enableHold) .cell-hold,
-  .client:not(.enableCallTimer) .cell-timer,
-  .client:not(.enableFullScreen) .cell-fullScreen,
-  .client:not(.enableSelfView) .cell-selfView,
-  .client:not(.enableSettings) .cell-settings,
-  .client:not(.enableDialpad) .cell-dialpad,
-  .client:not(.enableShareScreen) .cell-shareScreen,
-  .client:not(.enableCallControl) .callControl
+  .videoBar:not(.enableMute) .cell-muteAudio,
+  .videoBar:not(.enableTransfer) .cell-transfer,
+  .videoBar:not(.enableHold) .cell-hold,
+  .videoBar:not(.enableCallTimer) .cell-timer,
+  .videoBar:not(.enableFullScreen) .cell-fullScreen,
+  .videoBar:not(.enableSelfView) .cell-selfView,
+  .videoBar:not(.enableSettings) .cell-settings,
+  .videoBar:not(.enableDialpad) .cell-dialpad,
+  .videoBar:not(.enableShareScreen) .cell-shareScreen,
+  .videoBar:not(.enableCallControl) .callControl
     display none !important
