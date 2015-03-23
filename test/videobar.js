@@ -10,7 +10,8 @@ describe('videobar', function() {
     ExSIP = core.exsip;
     config = {
       enableTransfer: true,
-      enableCallStats: false
+      enableCallStats: false,
+      enableSelfView: true
     };
     testUA.createCore('configuration', config);
     testUA.createCore('sipstack', config);
@@ -26,6 +27,21 @@ describe('videobar', function() {
   });
   it('resume icon', function() {
     testUA.isVisible(videobarview.resume.element, false);
+  });
+  it('selfViewEnable icon', function() {
+    testUA.isVisible(videobarview.selfViewEnable, false);
+  });
+  it('selfViewDisable icon', function() {
+    testUA.isVisible(videobarview.selfViewDisable, true);
+  });
+  it('selfViewEnable icon after click', function() {
+    videobarview.selfViewDisable.trigger('click');
+    testUA.isVisible(videobarview.selfViewEnable, true);
+    testUA.isVisible(videobarview.selfViewDisable, false);
+    
+    videobarview.selfViewEnable.trigger('click');
+    testUA.isVisible(videobarview.selfViewEnable, false);
+    testUA.isVisible(videobarview.selfViewDisable, true);
   });
   it('hold icon on call started with enableHold is false', function() {
     configuration.enableHold = false;
