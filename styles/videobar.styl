@@ -118,7 +118,7 @@
       margin 0
       font-size 18px
       color #FFF
-      
+
   .videoBar.started .hangup, 
   .videoBar.calling .hangup
   .videoBar:not(.held).enableHold.started .hold,
@@ -126,7 +126,9 @@
   .videoBar.enableSettings .settings,
   .videoBar.enableSelfView:not(.video-hidden) .selfViewDisable,
   .videoBar.enableSelfView.video-hidden .selfViewEnable,
-  .videoBar.enableTransfer.started .transfer
+  .videoBar.enableTransfer.started .transfer,
+  .videoBar.enableDialpad.callcontrol-shown .dialpadIconHide,
+  .videoBar.enableDialpad:not(.callcontrol-shown) .dialpadIconShow
     {fadeIn}
     
   .videoBar.connected .hangup, 
@@ -135,10 +137,13 @@
   .videoBar:not(.started) .hold,
   .videoBar:not(.held) .resume, 
   .videoBar:not(.started) .resume,
+  .videoBar:not(.enableSettings) .settings,
   .videoBar.enableSelfView.video-hidden .selfViewDisable,
   .videoBar.enableSelfView:not(.video-hidden) .selfViewEnable,
   .videoBar.enableTransfer.connected .transfer, 
-  .videoBar.enableTransfer.disconnected .transfer
+  .videoBar.enableTransfer.disconnected .transfer,
+  .videoBar.enableDialpad:not(.callcontrol-shown) .dialpadIconHide,
+  .videoBar.enableDialpad.callcontrol-shown .dialpadIconShow
     {fadeOut}  
     
   .videoBar:not(.enableMute) .cell-muteAudio,

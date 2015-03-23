@@ -11,7 +11,8 @@ describe('videobar', function() {
     config = {
       enableTransfer: true,
       enableCallStats: false,
-      enableSelfView: true
+      enableSelfView: true,
+      enableDialpad: true
     };
     testUA.createCore('configuration', config);
     testUA.createCore('sipstack', config);
@@ -51,13 +52,10 @@ describe('videobar', function() {
     testUA.endCall();
     testUA.isVisible(videobarview.transfer, false);
   });
-  it('selfViewEnable icon', function() {
+  it('selfView icons', function() {
     testUA.isVisible(videobarview.selfViewEnable, false);
-  });
-  it('selfViewDisable icon', function() {
     testUA.isVisible(videobarview.selfViewDisable, true);
-  });
-  it('selfViewEnable icon after click', function() {
+
     videobarview.selfViewDisable.trigger('click');
     testUA.isVisible(videobarview.selfViewEnable, true);
     testUA.isVisible(videobarview.selfViewDisable, false);
@@ -66,6 +64,19 @@ describe('videobar', function() {
     testUA.isVisible(videobarview.selfViewEnable, false);
     testUA.isVisible(videobarview.selfViewDisable, true);
   });
+  // TODO - fix test case not depending on toggleView
+  // it('dialpad icons', function() {
+  //   testUA.isVisible(videobarview.dialpadIconShow, true);
+  //   testUA.isVisible(videobarview.dialpadIconHide, false);
+
+  //   videobarview.dialpadIconShow.trigger('click');
+  //   testUA.isVisible(videobarview.dialpadIconShow, false);
+  //   testUA.isVisible(videobarview.dialpadIconHide, true);
+    
+  //   videobarview.dialpadIconHide.trigger('click');
+  //   testUA.isVisible(videobarview.dialpadIconShow, true);
+  //   testUA.isVisible(videobarview.dialpadIconHide, false);
+  // });
   it('hold icon on call started with enableHold is false', function() {
     configuration.enableHold = false;
     testUA.startCall();
