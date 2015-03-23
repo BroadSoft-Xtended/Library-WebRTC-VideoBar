@@ -10,7 +10,7 @@ node_modules/views: lib/views
 	ln -sf ../lib/views node_modules/views
 
 node_modules/models: lib/models
-	ln -sf ../lib/views node_modules/models
+	ln -sf ../lib/models node_modules/models
 
 ## Compile styles ##################################################################
 styles/css: $(STYLUS_FILES)

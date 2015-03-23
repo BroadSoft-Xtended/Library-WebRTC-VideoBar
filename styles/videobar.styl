@@ -127,7 +127,8 @@
   .videoBar.enableHold.started.held .resume,
   .videoBar.enableSettings .settings,
   .videoBar.enableSelfView:not(.video-hidden) .selfViewDisable,
-  .videoBar.enableSelfView.video-hidden .selfViewEnable
+  .videoBar.enableSelfView.video-hidden .selfViewEnable,
+  .videoBar.enableTransfer.started .transfer
     {fadeIn}
     
   .videoBar.connected .hangup, 
@@ -137,7 +138,9 @@
   .videoBar:not(.held) .resume, 
   .videoBar:not(.started) .resume,
   .videoBar.enableSelfView.video-hidden .selfViewDisable,
-  .videoBar.enableSelfView:not(.video-hidden) .selfViewEnable
+  .videoBar.enableSelfView:not(.video-hidden) .selfViewEnable,
+  .videoBar.enableTransfer.connected .transfer, 
+  .videoBar.enableTransfer.disconnected .transfer
     {fadeOut}  
     
   .videoBar:not(.enableMute) .cell-muteAudio,

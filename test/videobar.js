@@ -28,6 +28,24 @@ describe('videobar', function() {
   it('resume icon', function() {
     testUA.isVisible(videobarview.resume.element, false);
   });
+  it('transfer icon', function() {
+    testUA.isVisible(videobarview.transfer, false);
+  });
+  it('transfer icon on started', function() {
+    testUA.isVisible(videobarview.transfer, false);
+    testUA.startCall();
+    testUA.isVisible(videobarview.transfer, true);
+    testUA.endCall();
+    testUA.isVisible(videobarview.transfer, false);
+  });
+  it('transfer icon on started and enableTransfer = false', function() {
+    configuration.enableTransfer = false;
+    testUA.isVisible(videobarview.transfer, false);
+    testUA.startCall();
+    testUA.isVisible(videobarview.transfer, false);
+    testUA.endCall();
+    testUA.isVisible(videobarview.transfer, false);
+  });
   it('selfViewEnable icon', function() {
     testUA.isVisible(videobarview.selfViewEnable, false);
   });
