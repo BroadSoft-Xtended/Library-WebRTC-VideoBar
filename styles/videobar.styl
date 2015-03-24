@@ -1,4 +1,5 @@
 @import 'node_modules/webrtc-core/styles/variables'
+@import 'node_modules/webrtc-core/styles/icons'
 
 .bdsft-client
   .videoBar
@@ -119,6 +120,37 @@
       font-size 18px
       color #FFF
 
+  .videoBar.fullscreen-shown
+    top auto !important
+    bottom 0px
+    position absolute
+
+  .videoBar.conference .icon-hangup:before, 
+  .videoBar.conference .icon-hangup:hover:before
+    color white !important
+
+  .videoBar.conference .selfViewDisable, 
+  .videoBar.conference .selfViewEnable
+    text-align right !important
+
+  .videoBar.conference .fullScreenExpand, 
+  .videoBar.conference .fullScreenContract
+    text-align left !important
+
+  .videoBar.audioOnly .fullScreenExpand, 
+  .videoBar.audioOnly .fullScreenContract,
+  .videoBar.audioOnly .selfViewDisable, 
+  .videoBar.audioOnly .selfViewEnable, 
+  .videoBar.audioOnly .cell-fullScreen, 
+  .videoBar.audioOnly .cell-selfView
+    display none !important
+
+  .videoBar.selfViewEnable a, 
+  .videoBar.dialpadIconHide a,
+  .videoBar.unmuteAudio a,
+  .videoBar.fullScreenContract a
+    color #04AFF0 !important
+
   .videoBar.started .hangup, 
   .videoBar.calling .hangup
   .videoBar:not(.held).enableHold.started .hold,
@@ -128,9 +160,15 @@
   .videoBar.enableSelfView.video-hidden .selfViewEnable,
   .videoBar.enableTransfer.started .transfer,
   .videoBar.enableDialpad.callcontrol-shown .dialpadIconHide,
-  .videoBar.enableDialpad:not(.callcontrol-shown) .dialpadIconShow
+  .videoBar.enableDialpad:not(.callcontrol-shown) .dialpadIconShow,
+  .videoBar.enableFullScreen:not(.fullscreen-shown) .fullScreenExpand,
+  .videoBar.enableFullScreen.fullscreen-shown .fullScreenContract,
+  .videoBar.enableMute:not(.sound-hidden).started .muteAudioIcon,
+  .videoBar.enableMute.sound-hidden.started .unmuteAudioIcon,
+  .videoBar.enableShareScreen:not(.screenshare-shown) .shareScreen,
+  .videoBar.enableShareScreen.screenshare-shown .stopShareScreen
     {fadeIn}
-    
+
   .videoBar.connected .hangup, 
   .videoBar.disconnected .hangup,
   .videoBar.held .hold, 
@@ -143,9 +181,17 @@
   .videoBar.enableTransfer.connected .transfer, 
   .videoBar.enableTransfer.disconnected .transfer,
   .videoBar.enableDialpad:not(.callcontrol-shown) .dialpadIconHide,
-  .videoBar.enableDialpad.callcontrol-shown .dialpadIconShow
+  .videoBar.enableDialpad.callcontrol-shown .dialpadIconShow,
+  .videoBar.enableFullScreen.fullscreen-shown .fullScreenExpand,
+  .videoBar.enableFullScreen:not(.fullscreen-shown) .fullScreenContract,
+  .videoBar.enableShareScreen.screenshare-shown .shareScreen, 
+  .videoBar.enableShareScreen:not(.screenshare-shown) .stopShareScreen,
+  .videoBar.enableMute:not(.started) .muteAudioIcon, 
+  .videoBar.enableMute:not(.started) .unmuteAudioIcon,
+  .videoBar.enableMute.sound-hidden.started .muteAudioIcon, 
+  .videoBar.enableMute:not(.sound-hidden).started .unmuteAudioIcon
     {fadeOut}  
-    
+
   .videoBar:not(.enableMute) .cell-muteAudio,
   .videoBar:not(.enableTransfer) .cell-transfer,
   .videoBar:not(.enableHold) .cell-hold,
