@@ -1,6 +1,6 @@
 {
   "name": "webrtc-videobar",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "videobar module for webrtc client",
   "main": "index.js",
   "scripts": {
