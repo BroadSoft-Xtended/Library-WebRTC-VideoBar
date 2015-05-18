@@ -20,7 +20,11 @@ describe('videobar', function() {
     testUA.mockWebRTC();
     testUA.createModelAndView('videobar', {
       videobar: require('../'),
-      timer: require('webrtc-timer')
+      timer: require('webrtc-timer'),
+      callcontrol: require('webrtc-callcontrol'),
+      settings: require('webrtc-settings'),
+      video: require('webrtc-video'),
+      transfer: require('webrtc-transfer')
     });
     eventbus = bdsft_client_instances.eventbus_test;
   });
