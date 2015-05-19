@@ -98,19 +98,18 @@ describe('videobar', function() {
     testUA.isVisible(videobarview.selfViewEnable, false);
     testUA.isVisible(videobarview.selfViewDisable, true);
   });
-  // TODO - fix test case not depending on toggleView
-  // it('dialpad icons', function() {
-  //   testUA.isVisible(videobarview.dialpadIconShow, true);
-  //   testUA.isVisible(videobarview.dialpadIconHide, false);
+  it('dialpad icons', function() {
+    testUA.isVisible(videobarview.dialpadIconShow, true);
+    testUA.isVisible(videobarview.dialpadIconHide, false);
 
-  //   videobarview.dialpadIconShow.trigger('click');
-  //   testUA.isVisible(videobarview.dialpadIconShow, false);
-  //   testUA.isVisible(videobarview.dialpadIconHide, true);
+    videobarview.dialpadIconShow.trigger('click');
+    testUA.isVisible(videobarview.dialpadIconShow, false);
+    testUA.isVisible(videobarview.dialpadIconHide, true);
     
-  //   videobarview.dialpadIconHide.trigger('click');
-  //   testUA.isVisible(videobarview.dialpadIconShow, true);
-  //   testUA.isVisible(videobarview.dialpadIconHide, false);
-  // });
+    videobarview.dialpadIconHide.trigger('click');
+    testUA.isVisible(videobarview.dialpadIconShow, true);
+    testUA.isVisible(videobarview.dialpadIconHide, false);
+  });
   it('hold icon on call started with enableHold is false', function() {
     configuration.enableHold = false;
     testUA.startCall();
