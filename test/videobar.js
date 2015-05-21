@@ -26,7 +26,7 @@ describe('videobar', function() {
       video: require('webrtc-video'),
       transfer: require('webrtc-transfer')
     });
-    eventbus = bdsft_client_instances.eventbus_test;
+    eventbus = bdsft_client_instances.test.eventbus;
   });
 
   it('fullscreen', function() {
