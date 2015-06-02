@@ -8,15 +8,7 @@ describe('videobar', function() {
     core = require('webrtc-core');
     testUA = core.testUA;
     ExSIP = core.exsip;
-    config = {
-      enableTransfer: true,
-      enableCallStats: false,
-      enableSelfView: true,
-      enableDialpad: true,
-      enableShareScreen: true
-    };
-    testUA.createCore('configuration', config);
-    testUA.createCore('sipstack', config);
+    testUA.createCore('sipstack');
     testUA.mockWebRTC();
     testUA.createModelAndView('videobar', {
       videobar: require('../'),
@@ -26,6 +18,10 @@ describe('videobar', function() {
       video: require('webrtc-video'),
       transfer: require('webrtc-transfer')
     });
+    urlconfig = bdsft_client_instances.test.urlconfig;
+    transfer = bdsft_client_instances.test.transfer;
+    video = bdsft_client_instances.test.video;
+    settings = bdsft_client_instances.test.settings;
     eventbus = bdsft_client_instances.test.eventbus;
   });
 
@@ -44,6 +40,7 @@ describe('videobar', function() {
     expect(videobar.classes.indexOf('fullscreen-hidden')).toNotEqual(-1);
   });
   it('screenshare', function() {
+    videobar.enableShareScreen = true;
     testUA.isVisible(videobarview.shareScreen, true);
     testUA.isVisible(videobarview.stopShareScreen, false);
 
@@ -56,11 +53,12 @@ describe('videobar', function() {
     testUA.isVisible(videobarview.shareScreen, true);
     testUA.isVisible(videobarview.stopShareScreen, false);
     expect(videobar.classes.indexOf('screenshare-hidden')).toNotEqual(-1);
+    videobar.enableShareScreen = false;
   });
   it('with audioOnly', function() {
-    configuration.view = 'audioOnly';
+    urlconfig.view = 'audioOnly';
     expect(videobar.classes.indexOf('audioOnly')).toNotEqual(-1);
-    configuration.view = '';
+    urlconfig.view = '';
   });
   it('hold icon:', function() {
     testUA.isVisible(videobarview.hold.element, false);
@@ -79,7 +77,7 @@ describe('videobar', function() {
     testUA.isVisible(videobarview.transfer, false);
   });
   it('transfer icon on started and enableTransfer = false', function() {
-    configuration.enableTransfer = false;
+    transfer.enableTransfer = false;
     testUA.isVisible(videobarview.transfer, false);
     testUA.startCall();
     testUA.isVisible(videobarview.transfer, false);
@@ -111,38 +109,38 @@ describe('videobar', function() {
     testUA.isVisible(videobarview.dialpadIconHide, false);
   });
   it('hold icon on call started with enableHold is false', function() {
-    configuration.enableHold = false;
+    videobar.enableHold = false;
     testUA.startCall();
     testUA.isVisible(videobarview.hold.element, false);
     testUA.endCall();
   });
   it('hold icon on call started with enableHold is true', function() {
-    configuration.enableHold = true;
+    videobar.enableHold = true;
     testUA.startCall();
     testUA.isVisible(videobarview.hold.element, true);
     testUA.endCall();
   });
   it('resume icon on call started with enableHold is false', function() {
-    configuration.enableHold = false;
+    videobar.enableHold = false;
     testUA.startCall();
     testUA.isVisible(videobarview.resume.element, false);
     testUA.endCall();
   });
   it('resume icon on call started with enableHold is true', function() {
-    configuration.enableHold = true;
+    videobar.enableHold = true;
     testUA.startCall();
     testUA.isVisible(videobarview.resume.element, false);
     testUA.endCall();
   });
   it('hold icon after call held', function() {
-    configuration.enableHold = true;
+    videobar.enableHold = true;
     testUA.startCall();
     videobarview.hold.element.trigger("click");
     testUA.isVisible(videobarview.hold.element, false);
     testUA.endCall();
   });
   it('resume icon after call held', function() {
-    configuration.enableHold = true;
+    videobar.enableHold = true;
     testUA.startCall();
     videobarview.hold.element.trigger("click");
     expect(videobarview.hold.disabled).toEqual(false);
@@ -150,7 +148,7 @@ describe('videobar', function() {
     testUA.endCall();
   });
   it('hold icon after call resumed', function() {
-    configuration.enableHold = true;
+    videobar.enableHold = true;
     testUA.startCall();
     videobarview.hold.element.trigger("click");
     videobarview.resume.element.trigger("click");
@@ -159,7 +157,7 @@ describe('videobar', function() {
     testUA.endCall();
   });
   it('resume icon after call resumed', function() {
-    configuration.enableHold = true;
+    videobar.enableHold = true;
     testUA.startCall();
     videobarview.hold.element.trigger("click");
     videobarview.resume.element.trigger("click");
@@ -167,7 +165,7 @@ describe('videobar', function() {
     testUA.endCall();
   });
   it('hold icon on call ended', function() {
-    configuration.enableHold = true;
+    videobar.enableHold = true;
     testUA.startCall();
     testUA.endCall();
     testUA.isVisible(videobarview.hold.element, false);
@@ -179,11 +177,11 @@ describe('videobar', function() {
     testUA.isVisible(videobarview.resume.element, false);
   });
   it('settings icon', function() {
-    configuration.enableSettings = true;
+    settings.enableSettings = true;
     testUA.isVisible(videobarview.settings, true);
   });
   it('settings icon with enableSettings = false', function() {
-    configuration.enableSettings = false;
+    settings.enableSettings = false;
     testUA.isVisible(videobarview.settings, false);
   });  
   it('muteAudio', function() {
@@ -211,17 +209,17 @@ describe('videobar', function() {
     testUA.endCall();
   });
   it('fullScreen icon', function() {
-    configuration.enableFullScreen = true;
+    videobar.enableFullScreen = true;
     testUA.isVisible(videobarview.fullScreenExpand, true);
     testUA.isVisible(videobarview.fullScreenContract, false);
   });
   it('fullScreen icon with enableFullScreen = false', function() {
-    configuration.enableFullScreen = false;
+    videobar.enableFullScreen = false;
     testUA.isVisible(videobarview.fullScreenExpand, false);
     testUA.isVisible(videobarview.fullScreenContract, false);
   });
   it('fullScreen icon after click', function() {
-    configuration.enableFullScreen = true;
+    videobar.enableFullScreen = true;
     videobarview.fullScreenExpand.trigger('click');
     testUA.isVisible(videobarview.fullScreenExpand, false);
     testUA.isVisible(videobarview.fullScreenContract, true);
@@ -230,17 +228,17 @@ describe('videobar', function() {
     testUA.isVisible(videobarview.fullScreenContract, false);
   });
   it('selfView icon', function() {
-    configuration.enableSelfView = true;
+    video.enableSelfView = true;
     testUA.isVisible(videobarview.selfViewEnable, false);
     testUA.isVisible(videobarview.selfViewDisable, true);
   });
   it('selfView icon with enableSelfView = false', function() {
-    configuration.enableSelfView = false;
+    video.enableSelfView = false;
     testUA.isVisible(videobarview.selfViewEnable, false);
     testUA.isVisible(videobarview.selfViewDisable, false);
   });
   it('selfView icon after click', function() {
-    configuration.enableSelfView = true;
+    video.enableSelfView = true;
     videobarview.selfViewDisable.trigger('click');
     testUA.isVisible(videobarview.selfViewEnable, true);
     testUA.isVisible(videobarview.selfViewDisable, false);
@@ -249,17 +247,17 @@ describe('videobar', function() {
     testUA.isVisible(videobarview.selfViewDisable, true);
   });
   it('dialpad icon', function() {
-    configuration.enableDialpad = true;
+    videobar.enableDialpad = true;
     testUA.isVisible(videobarview.dialpadIconShow, true);
     testUA.isVisible(videobarview.dialpadIconHide, false);
   });
   it('dialpad icon with enableDialpad = false', function() {
-    configuration.enableDialpad = false;
+    videobar.enableDialpad = false;
     testUA.isVisible(videobarview.dialpadIconShow, false);
     testUA.isVisible(videobarview.dialpadIconHide, false);
   });
   it('dialpad icon after click and in call', function() {
-    configuration.enableDialpad = true;
+    videobar.enableDialpad = true;
     testUA.connectAndStartCall();
     testUA.isVisible(videobarview.hangup, true);
     videobarview.dialpadIconShow.trigger('click');
@@ -274,25 +272,25 @@ describe('videobar', function() {
     testUA.endCall();
   });
   it('muteAudio on call started and disabled muted', function() {
-    configuration.enableMute = false;
+    videobar.enableMute = false;
     testUA.connectAndStartCall();
     testUA.isVisible(videobarview.muteAudioIcon, false);
     testUA.endCall();
   });
   it('unmuteAudio on call started and disabled muted', function() {
-    configuration.enableMute = false;
+    videobar.enableMute = false;
     testUA.connectAndStartCall();
     testUA.isVisible(videobarview.unmuteAudioIcon, false);
     testUA.endCall();
   });
   it('muteAudio on call ended', function() {
-    configuration.enableMute = true;
+    videobar.enableMute = true;
     testUA.connectAndStartCall();
     testUA.endCall();
     testUA.isVisible(videobarview.muteAudioIcon, false);
   });
   it('unmuteAudio on call ended', function() {
-    configuration.enableMute = true;
+    videobar.enableMute = true;
     testUA.isVisible(videobarview.muteAudioIcon, false);
     testUA.isVisible(videobarview.unmuteAudioIcon, false);
     testUA.connectAndStartCall();
@@ -307,7 +305,7 @@ describe('videobar', function() {
     testUA.isVisible(videobarview.unmuteAudioIcon, false);
   });
   it('hangup on call ended', function() {
-    configuration.enableMute = true;
+    videobar.enableMute = true;
     testUA.connectAndStartCall();
     testUA.endCall();
     testUA.isVisible(videobarview.hangup, false);
