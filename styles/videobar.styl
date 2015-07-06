@@ -1,4 +1,4 @@
-.bdsft-client
+.bdsft-webrtc
   .videoBar
     position relative
     top 0px
@@ -54,7 +54,7 @@
       width 42px
     .subtitle
       display none
-    .cellTimer
+    .timerHolder
       position relative
       top 0
       left 0
@@ -74,7 +74,7 @@
     &._1280x720, &.hd
       width 1280px
 
-  .hangup, .fullScreen, .selfView, .muteAudioIcon, .dialpadIcon, .messages
+  .hangup, .fullScreen, .selfView, .mute, .dialpadIcon, .messages
     top 0
     left 0
 
@@ -133,82 +133,82 @@
     top auto !important
     bottom 0px
     position absolute
+    width 100%
 
   .videoBar.conference .icon-hangup:before, 
   .videoBar.conference .icon-hangup:hover:before
     color white !important
 
-  .videoBar.conference .selfViewDisable, 
-  .videoBar.conference .selfViewEnable
+  .videoBar.conference .selfViewHide, 
+  .videoBar.conference .selfViewShow
     text-align right !important
 
-  .videoBar.conference .fullScreenExpand, 
-  .videoBar.conference .fullScreenContract
+  .videoBar.conference .fullscreenExpand, 
+  .videoBar.conference .fullscreenContract
     text-align left !important
 
-  .videoBar.audioOnly .fullScreenExpand, 
-  .videoBar.audioOnly .fullScreenContract,
-  .videoBar.audioOnly .selfViewDisable, 
-  .videoBar.audioOnly .selfViewEnable, 
+  .videoBar.audioOnly .fullscreenExpand, 
+  .videoBar.audioOnly .fullscreenContract,
+  .videoBar.audioOnly .selfViewHide, 
+  .videoBar.audioOnly .selfViewShow, 
   .videoBar.audioOnly .cell-fullScreen, 
   .videoBar.audioOnly .cell-selfView
     display none !important
 
-  .videoBar.selfViewEnable a, 
-  .videoBar.dialpadIconHide a,
+  .videoBar.selfViewShow a, 
+  .videoBar.dialpadHide a,
   .videoBar.unmuteAudio a,
-  .videoBar.fullScreenContract a
+  .videoBar.fullscreenContract a
     color #04AFF0 !important
 
   .videoBar.started .hangup, 
   .videoBar.calling .hangup
   .videoBar:not(.held).enableHold.started .hold,
-  .videoBar.enableHold.started.held .resume,
+  .videoBar.enableHold.held .resume,
   .videoBar.enableSettings .settings,
-  .videoBar.enableSelfView:not(.video-hidden) .selfViewDisable,
-  .videoBar.enableSelfView.video-hidden .selfViewEnable,
+  .videoBar.enableSelfView:not(.video-hidden) .selfViewHide,
+  .videoBar.enableSelfView.video-hidden .selfViewShow,
   .videoBar.enableTransfer.started .transfer,
-  .videoBar.enableDialpad.callcontrol-shown .dialpadIconHide,
-  .videoBar.enableDialpad:not(.callcontrol-shown) .dialpadIconShow,
-  .videoBar.enableFullScreen:not(.fullscreen-shown) .fullScreenExpand,
-  .videoBar.enableFullScreen.fullscreen-shown .fullScreenContract,
-  .videoBar.enableMute:not(.sound-hidden).started .muteAudioIcon,
-  .videoBar.enableMute.sound-hidden.started .unmuteAudioIcon,
-  .videoBar.enableShareScreen:not(.screenshare-shown) .shareScreen,
-  .videoBar.enableShareScreen.screenshare-shown .stopShareScreen
+  .videoBar.enableCallControl.callcontrol-shown .dialpadHide,
+  .videoBar.enableCallControl:not(.callcontrol-shown) .dialpadShow,
+  .videoBar.enableFullscreen:not(.fullscreen-shown) .fullscreenExpand,
+  .videoBar.enableFullscreen.fullscreen-shown .fullscreenContract,
+  .videoBar.enableMute:not(.muted).started .mute,
+  .videoBar.enableMute.muted.started .unmute,
+  .videoBar.enableScreenshare:not(.screenshare-shown) .screenshareStart,
+  .videoBar.enableScreenshare.screenshare-shown .screenshareStop
     {fadeIn}
 
   .videoBar.connected .hangup, 
   .videoBar.disconnected .hangup,
   .videoBar.held .hold, 
   .videoBar:not(.started) .hold,
-  .videoBar:not(.held) .resume, 
   .videoBar:not(.started) .resume,
+  .videoBar:not(.held) .resume, 
   .videoBar:not(.enableSettings) .settings,
-  .videoBar.enableSelfView.video-hidden .selfViewDisable,
-  .videoBar.enableSelfView:not(.video-hidden) .selfViewEnable,
+  .videoBar.enableSelfView.video-hidden .selfViewHide,
+  .videoBar.enableSelfView:not(.video-hidden) .selfViewShow,
   .videoBar.enableTransfer.connected .transfer, 
   .videoBar.enableTransfer.disconnected .transfer,
-  .videoBar.enableDialpad:not(.callcontrol-shown) .dialpadIconHide,
-  .videoBar.enableDialpad.callcontrol-shown .dialpadIconShow,
-  .videoBar.enableFullScreen.fullscreen-shown .fullScreenExpand,
-  .videoBar.enableFullScreen:not(.fullscreen-shown) .fullScreenContract,
-  .videoBar.enableShareScreen.screenshare-shown .shareScreen, 
-  .videoBar.enableShareScreen:not(.screenshare-shown) .stopShareScreen,
-  .videoBar.enableMute:not(.started) .muteAudioIcon, 
-  .videoBar.enableMute:not(.started) .unmuteAudioIcon,
-  .videoBar.enableMute.sound-hidden.started .muteAudioIcon, 
-  .videoBar.enableMute:not(.sound-hidden).started .unmuteAudioIcon
+  .videoBar.enableCallControl:not(.callcontrol-shown) .dialpadHide,
+  .videoBar.enableCallControl.callcontrol-shown .dialpadShow,
+  .videoBar.enableFullscreen.fullscreen-shown .fullscreenExpand,
+  .videoBar.enableFullscreen:not(.fullscreen-shown) .fullscreenContract,
+  .videoBar.enableScreenshare.screenshare-shown .screenshareStart, 
+  .videoBar.enableScreenshare:not(.screenshare-shown) .screenshareStop,
+  .videoBar.enableMute:not(.started) .mute, 
+  .videoBar.enableMute:not(.started) .unmute,
+  .videoBar.enableMute.muted.started .mute, 
+  .videoBar.enableMute:not(.muted).started .unmute
     {fadeOut}  
 
   .videoBar:not(.enableMute) .cell-muteAudio,
   .videoBar:not(.enableTransfer) .cell-transfer,
   .videoBar:not(.enableHold) .cell-hold,
   .videoBar:not(.enableCallTimer) .cell-timer,
-  .videoBar:not(.enableFullScreen) .cell-fullScreen,
+  .videoBar:not(.enableFullscreen) .cell-fullScreen,
   .videoBar:not(.enableSelfView) .cell-selfView,
   .videoBar:not(.enableSettings) .cell-settings,
-  .videoBar:not(.enableDialpad) .cell-dialpad,
-  .videoBar:not(.enableShareScreen) .cell-shareScreen,
-  .videoBar:not(.enableCallControl) .callControl
+  .videoBar:not(.enableCallControl) .cell-dialpad,
+  .videoBar:not(.enableScreenshare) .cell-screenshareStart
     display none !important

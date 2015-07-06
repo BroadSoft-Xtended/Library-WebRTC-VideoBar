@@ -1,21 +1,21 @@
-.bdsft-client
+.bdsft-webrtc
   .videoBar.classes
     .table.fixed.collapse
       .cell.leftSpacer
       .cell.cell-selfView
-        .selfViewDisable.icon.fadeable
-          a.icon-selfViewDisable(href='', title='Disable Self View')
-        .selfViewEnable.icon.fadeable
-          a.icon-selfViewEnable(href='', title='Enable Self View')
+        .selfViewHide.icon.fadeable
+          a.icon-selfViewHide(href='', title='Disable Self View')
+        .selfViewShow.icon.fadeable
+          a.icon-selfViewShow(href='', title='Enable Self View')
       .cell.cell-dialpad
-        .dialpadIconShow.icon.fadeable
+        .dialpadShow.icon.fadeable
           a.icon-dialpadShow(href='', title='Show Dialpad')
-        .dialpadIconHide.icon.fadeable
+        .dialpadHide.icon.fadeable
           a.icon-dialpadHide(href='', title='Hide Dialpad')
       .cell.cell-muteAudio
-        .icon.fadeable.muteAudioIcon
+        .icon.fadeable.mute
           a.icon-muteAudio(href='', title='Mute Audio')
-        .icon.fadeable.unmuteAudioIcon
+        .icon.fadeable.unmute
           a.icon-unmuteAudio(href='', title='Unmute Audio')
       .cell.cell-hold
         .hold.icon.fadeable
@@ -29,19 +29,19 @@
       .cell.cell-transfer
         .transfer.icon.fadeable
           a.icon-transfer(href='', title='Transfer')
-      .cell.cell-shareScreen
-        .icon.fadeable.shareScreen
+      .cell.cell-screenshareStart
+        .icon.fadeable.screenshareStart
           a.icon-screen-sharing(href='', title='Share Screen')
-        .icon.fadeable.stopShareScreen
+        .icon.fadeable.screenshareStop
           a.icon-screen-sharing-off(href='', title='Stop Share Screen')
-      .cell.cellTimer
+      .cell.timerHolder
       .cell.cell-settings
         .settings.icon.fadeable
           a.icon-settings(href='', title='Settings')
       .cell.cell-fullScreen
-        .fullScreenExpand.icon.fadeable
-          a.icon-fullScreenExpand(href='', title='Expand Full Screen')
-        .fullScreenContract.icon.fadeable
-          a.icon-fullScreenContract(href='', title='Contract Full Screen')
+        .fullscreenExpand.icon.fadeable
+          a.icon-fullscreenExpand(href='', title='Expand Full Screen')
+        .fullscreenContract.icon.fadeable
+          a.icon-fullscreenContract(href='', title='Contract Full Screen')
       .cell.rightSpacer
 

@@ -16,44 +16,48 @@ describe('videobar', function() {
       callcontrol: require('webrtc-callcontrol'),
       settings: require('webrtc-settings'),
       video: require('webrtc-video'),
-      transfer: require('webrtc-transfer')
+      transfer: require('webrtc-transfer'),
+      messages: require('webrtc-messages'),
+      authentication: require('webrtc-authentication')
     });
+    screenshare = bdsft_client_instances.test.screenshare;
+    fullscreen = bdsft_client_instances.test.fullscreen;
+    callcontrol = bdsft_client_instances.test.callcontrol;
     urlconfig = bdsft_client_instances.test.urlconfig;
     transfer = bdsft_client_instances.test.transfer;
     video = bdsft_client_instances.test.video;
     settings = bdsft_client_instances.test.settings;
-    eventbus = bdsft_client_instances.test.eventbus;
   });
 
   it('fullscreen', function() {
-    testUA.isVisible(videobarview.fullScreenExpand, true);
-    testUA.isVisible(videobarview.fullScreenContract, false);
+    testUA.isVisible(videobarview.fullscreenExpand, true);
+    testUA.isVisible(videobarview.fullscreenContract, false);
 
-    videobarview.fullScreenExpand.trigger('click');
-    testUA.isVisible(videobarview.fullScreenExpand, false);
-    testUA.isVisible(videobarview.fullScreenContract, true);
+    videobarview.fullscreenExpand.trigger('click');
+    testUA.isVisible(videobarview.fullscreenExpand, false);
+    testUA.isVisible(videobarview.fullscreenContract, true);
     expect(videobar.classes.indexOf('fullscreen-shown')).toNotEqual(-1);
 
-    videobarview.fullScreenContract.trigger('click');
-    testUA.isVisible(videobarview.fullScreenExpand, true);
-    testUA.isVisible(videobarview.fullScreenContract, false);
+    videobarview.fullscreenContract.trigger('click');
+    testUA.isVisible(videobarview.fullscreenExpand, true);
+    testUA.isVisible(videobarview.fullscreenContract, false);
     expect(videobar.classes.indexOf('fullscreen-hidden')).toNotEqual(-1);
   });
   it('screenshare', function() {
-    videobar.enableShareScreen = true;
-    testUA.isVisible(videobarview.shareScreen, true);
-    testUA.isVisible(videobarview.stopShareScreen, false);
+    screenshare.enableScreenshare = true;
+    testUA.isVisible(videobarview.screenshareStart, true);
+    testUA.isVisible(videobarview.screenshareStop, false);
 
-    videobarview.shareScreen.trigger('click');
-    testUA.isVisible(videobarview.shareScreen, false);
-    testUA.isVisible(videobarview.stopShareScreen, true);
+    videobarview.screenshareStart.trigger('click');
+    testUA.isVisible(videobarview.screenshareStart, false);
+    testUA.isVisible(videobarview.screenshareStop, true);
     expect(videobar.classes.indexOf('screenshare-shown')).toNotEqual(-1);
 
-    videobarview.stopShareScreen.trigger('click');
-    testUA.isVisible(videobarview.shareScreen, true);
-    testUA.isVisible(videobarview.stopShareScreen, false);
+    videobarview.screenshareStop.trigger('click');
+    testUA.isVisible(videobarview.screenshareStart, true);
+    testUA.isVisible(videobarview.screenshareStop, false);
     expect(videobar.classes.indexOf('screenshare-hidden')).toNotEqual(-1);
-    videobar.enableShareScreen = false;
+    screenshare.enableScreenshare = false;
   });
   it('with audioOnly', function() {
     urlconfig.view = 'audioOnly';
@@ -85,28 +89,28 @@ describe('videobar', function() {
     testUA.isVisible(videobarview.transfer, false);
   });
   it('selfView icons', function() {
-    testUA.isVisible(videobarview.selfViewEnable, false);
-    testUA.isVisible(videobarview.selfViewDisable, true);
+    testUA.isVisible(videobarview.selfViewShow, false);
+    testUA.isVisible(videobarview.selfViewHide, true);
 
-    videobarview.selfViewDisable.trigger('click');
-    testUA.isVisible(videobarview.selfViewEnable, true);
-    testUA.isVisible(videobarview.selfViewDisable, false);
+    videobarview.selfViewHide.trigger('click');
+    testUA.isVisible(videobarview.selfViewShow, true);
+    testUA.isVisible(videobarview.selfViewHide, false);
     
-    videobarview.selfViewEnable.trigger('click');
-    testUA.isVisible(videobarview.selfViewEnable, false);
-    testUA.isVisible(videobarview.selfViewDisable, true);
+    videobarview.selfViewShow.trigger('click');
+    testUA.isVisible(videobarview.selfViewShow, false);
+    testUA.isVisible(videobarview.selfViewHide, true);
   });
   it('dialpad icons', function() {
-    testUA.isVisible(videobarview.dialpadIconShow, true);
-    testUA.isVisible(videobarview.dialpadIconHide, false);
+    testUA.isVisible(videobarview.dialpadShow, true);
+    testUA.isVisible(videobarview.dialpadHide, false);
 
-    videobarview.dialpadIconShow.trigger('click');
-    testUA.isVisible(videobarview.dialpadIconShow, false);
-    testUA.isVisible(videobarview.dialpadIconHide, true);
+    videobarview.dialpadShow.trigger('click');
+    testUA.isVisible(videobarview.dialpadShow, false);
+    testUA.isVisible(videobarview.dialpadHide, true);
     
-    videobarview.dialpadIconHide.trigger('click');
-    testUA.isVisible(videobarview.dialpadIconShow, true);
-    testUA.isVisible(videobarview.dialpadIconHide, false);
+    videobarview.dialpadHide.trigger('click');
+    testUA.isVisible(videobarview.dialpadShow, true);
+    testUA.isVisible(videobarview.dialpadHide, false);
   });
   it('hold icon on call started with enableHold is false', function() {
     videobar.enableHold = false;
@@ -132,28 +136,41 @@ describe('videobar', function() {
     testUA.isVisible(videobarview.resume.element, false);
     testUA.endCall();
   });
-  it('hold icon after call held', function() {
+  it('call held', function() {
     videobar.enableHold = true;
-    testUA.startCall();
+    var session = testUA.startCall();
+    session.hold = function(success) {if (success) { success(); }}
     videobarview.hold.element.trigger("click");
-    testUA.isVisible(videobarview.hold.element, false);
-    testUA.endCall();
-  });
-  it('resume icon after call held', function() {
-    videobar.enableHold = true;
-    testUA.startCall();
-    videobarview.hold.element.trigger("click");
+    expect(videobarview.resume.disabled).toEqual(false);
+    expect(videobarview.hold.disabled).toEqual(true);
+    testUA.isVisible(videobarview.hold.element, true);
+    testUA.isVisible(videobarview.resume.element, false);
+    session.held();
+    testUA.isVisible(videobarview.hangup, true);
+    testUA.isVisible(videobarview.mute, true);
+    expect(videobarview.resume.disabled).toEqual(false);
     expect(videobarview.hold.disabled).toEqual(false);
+    testUA.isVisible(videobarview.hold.element, false);
     testUA.isVisible(videobarview.resume.element, true);
     testUA.endCall();
   });
-  it('hold icon after call resumed', function() {
+  it('call resumed', function() {
     videobar.enableHold = true;
-    testUA.startCall();
+    var session = testUA.startCall();
+    session.hold = function(success) {if (success) { success(); }}
+    session.unhold = function(success) {if (success) { success(); }}
     videobarview.hold.element.trigger("click");
+    session.held();
     videobarview.resume.element.trigger("click");
+    expect(videobarview.resume.disabled).toEqual(true);
+    expect(videobarview.hold.disabled).toEqual(false);
+    testUA.isVisible(videobarview.hold.element, false);
+    testUA.isVisible(videobarview.resume.element, true);
+    session.resumed();
     expect(videobarview.resume.disabled).toEqual(false);
+    expect(videobarview.hold.disabled).toEqual(false);
     testUA.isVisible(videobarview.hold.element, true);
+    testUA.isVisible(videobarview.resume.element, false);
     testUA.endCall();
   });
   it('resume icon after call resumed', function() {
@@ -185,84 +202,84 @@ describe('videobar', function() {
     testUA.isVisible(videobarview.settings, false);
   });  
   it('muteAudio', function() {
-    testUA.isVisible(videobarview.muteAudioIcon, false);
+    testUA.isVisible(videobarview.mute, false);
   });
   it('unmuteAudio', function() {
-    testUA.isVisible(videobarview.unmuteAudioIcon, false);
+    testUA.isVisible(videobarview.unmute, false);
   });
   it('hangup', function() {
     testUA.isVisible(videobarview.hangup, false);
   });
   it('muteAudio on call started', function() {
     testUA.connectAndStartCall();
-    testUA.isVisible(videobarview.muteAudioIcon, true);
+    testUA.isVisible(videobarview.mute, true);
     testUA.endCall();
   });
   it('muteAudio on mute triggered', function() {
     testUA.connectAndStartCall();
-    videobarview.muteAudioIcon.trigger("click");
-    testUA.isVisible(videobarview.muteAudioIcon, false);
-    testUA.isVisible(videobarview.unmuteAudioIcon, true);
-    videobarview.unmuteAudioIcon.trigger("click");
-    testUA.isVisible(videobarview.unmuteAudioIcon, false);
-    testUA.isVisible(videobarview.muteAudioIcon, true);
+    videobarview.mute.trigger("click");
+    testUA.isVisible(videobarview.mute, false);
+    testUA.isVisible(videobarview.unmute, true);
+    videobarview.unmute.trigger("click");
+    testUA.isVisible(videobarview.unmute, false);
+    testUA.isVisible(videobarview.mute, true);
     testUA.endCall();
   });
   it('fullScreen icon', function() {
-    videobar.enableFullScreen = true;
-    testUA.isVisible(videobarview.fullScreenExpand, true);
-    testUA.isVisible(videobarview.fullScreenContract, false);
+    fullscreen.enableFullscreen = true;
+    testUA.isVisible(videobarview.fullscreenExpand, true);
+    testUA.isVisible(videobarview.fullscreenContract, false);
   });
   it('fullScreen icon with enableFullScreen = false', function() {
-    videobar.enableFullScreen = false;
-    testUA.isVisible(videobarview.fullScreenExpand, false);
-    testUA.isVisible(videobarview.fullScreenContract, false);
+    fullscreen.enableFullscreen = false;
+    testUA.isVisible(videobarview.fullscreenExpand, false);
+    testUA.isVisible(videobarview.fullscreenContract, false);
   });
   it('fullScreen icon after click', function() {
-    videobar.enableFullScreen = true;
-    videobarview.fullScreenExpand.trigger('click');
-    testUA.isVisible(videobarview.fullScreenExpand, false);
-    testUA.isVisible(videobarview.fullScreenContract, true);
-    videobarview.fullScreenContract.trigger('click');
-    testUA.isVisible(videobarview.fullScreenExpand, true);
-    testUA.isVisible(videobarview.fullScreenContract, false);
+    fullscreen.enableFullscreen = true;
+    videobarview.fullscreenExpand.trigger('click');
+    testUA.isVisible(videobarview.fullscreenExpand, false);
+    testUA.isVisible(videobarview.fullscreenContract, true);
+    videobarview.fullscreenContract.trigger('click');
+    testUA.isVisible(videobarview.fullscreenExpand, true);
+    testUA.isVisible(videobarview.fullscreenContract, false);
   });
   it('selfView icon', function() {
     video.enableSelfView = true;
-    testUA.isVisible(videobarview.selfViewEnable, false);
-    testUA.isVisible(videobarview.selfViewDisable, true);
+    testUA.isVisible(videobarview.selfViewShow, false);
+    testUA.isVisible(videobarview.selfViewHide, true);
   });
   it('selfView icon with enableSelfView = false', function() {
     video.enableSelfView = false;
-    testUA.isVisible(videobarview.selfViewEnable, false);
-    testUA.isVisible(videobarview.selfViewDisable, false);
+    testUA.isVisible(videobarview.selfViewShow, false);
+    testUA.isVisible(videobarview.selfViewHide, false);
   });
   it('selfView icon after click', function() {
     video.enableSelfView = true;
-    videobarview.selfViewDisable.trigger('click');
-    testUA.isVisible(videobarview.selfViewEnable, true);
-    testUA.isVisible(videobarview.selfViewDisable, false);
-    videobarview.selfViewEnable.trigger('click');
-    testUA.isVisible(videobarview.selfViewEnable, false);
-    testUA.isVisible(videobarview.selfViewDisable, true);
+    videobarview.selfViewHide.trigger('click');
+    testUA.isVisible(videobarview.selfViewShow, true);
+    testUA.isVisible(videobarview.selfViewHide, false);
+    videobarview.selfViewShow.trigger('click');
+    testUA.isVisible(videobarview.selfViewShow, false);
+    testUA.isVisible(videobarview.selfViewHide, true);
   });
   it('dialpad icon', function() {
-    videobar.enableDialpad = true;
-    testUA.isVisible(videobarview.dialpadIconShow, true);
-    testUA.isVisible(videobarview.dialpadIconHide, false);
+    callcontrol.enableCallControl = true;
+    testUA.isVisible(videobarview.dialpadShow, true);
+    testUA.isVisible(videobarview.dialpadHide, false);
   });
   it('dialpad icon with enableDialpad = false', function() {
-    videobar.enableDialpad = false;
-    testUA.isVisible(videobarview.dialpadIconShow, false);
-    testUA.isVisible(videobarview.dialpadIconHide, false);
+    callcontrol.enableCallControl = false;
+    testUA.isVisible(videobarview.dialpadShow, false);
+    testUA.isVisible(videobarview.dialpadHide, false);
   });
   it('dialpad icon after click and in call', function() {
-    videobar.enableDialpad = true;
+    callcontrol.enableCallControl = true;
     testUA.connectAndStartCall();
     testUA.isVisible(videobarview.hangup, true);
-    videobarview.dialpadIconShow.trigger('click');
+    videobarview.dialpadShow.trigger('click');
     testUA.isVisible(videobarview.hangup, true);
-    videobarview.dialpadIconHide.trigger('click');
+    videobarview.dialpadHide.trigger('click');
     testUA.isVisible(videobarview.hangup, true);
     testUA.endCall();
   });
@@ -274,35 +291,35 @@ describe('videobar', function() {
   it('muteAudio on call started and disabled muted', function() {
     videobar.enableMute = false;
     testUA.connectAndStartCall();
-    testUA.isVisible(videobarview.muteAudioIcon, false);
+    testUA.isVisible(videobarview.mute, false);
     testUA.endCall();
   });
   it('unmuteAudio on call started and disabled muted', function() {
     videobar.enableMute = false;
     testUA.connectAndStartCall();
-    testUA.isVisible(videobarview.unmuteAudioIcon, false);
+    testUA.isVisible(videobarview.unmute, false);
     testUA.endCall();
   });
   it('muteAudio on call ended', function() {
     videobar.enableMute = true;
     testUA.connectAndStartCall();
     testUA.endCall();
-    testUA.isVisible(videobarview.muteAudioIcon, false);
+    testUA.isVisible(videobarview.mute, false);
   });
   it('unmuteAudio on call ended', function() {
     videobar.enableMute = true;
-    testUA.isVisible(videobarview.muteAudioIcon, false);
-    testUA.isVisible(videobarview.unmuteAudioIcon, false);
+    testUA.isVisible(videobarview.mute, false);
+    testUA.isVisible(videobarview.unmute, false);
     testUA.connectAndStartCall();
-    testUA.isVisible(videobarview.muteAudioIcon, true);
-    testUA.isVisible(videobarview.unmuteAudioIcon, false);
-    videobarview.muteAudioIcon.trigger("click");
-    testUA.isVisible(videobarview.unmuteAudioIcon, true);
-    testUA.isVisible(videobarview.muteAudioIcon, false);
+    testUA.isVisible(videobarview.mute, true);
+    testUA.isVisible(videobarview.unmute, false);
+    videobarview.mute.trigger("click");
+    testUA.isVisible(videobarview.unmute, true);
+    testUA.isVisible(videobarview.mute, false);
     testUA.endCall();
     expect(sipstack.getCallState()).toEqual("connected");
-    testUA.isVisible(videobarview.muteAudioIcon, false);
-    testUA.isVisible(videobarview.unmuteAudioIcon, false);
+    testUA.isVisible(videobarview.mute, false);
+    testUA.isVisible(videobarview.unmute, false);
   });
   it('hangup on call ended', function() {
     videobar.enableMute = true;

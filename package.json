@@ -14,6 +14,8 @@
     "webrtc-video": "git+ssh://git.broadsoftlabs.net:7922/wrtc/callcontrol.git",
     "webrtc-callcontrol": "git+ssh://git.broadsoftlabs.net:7922/wrtc/video.git",
     "webrtc-settings": "git+ssh://git.broadsoftlabs.net:7922/wrtc/settings.git",
+    "webrtc-messages": "git+ssh://git.broadsoftlabs.net:7922/wrtc/messages.git",
+    "webrtc-authentication": "git+ssh://git.broadsoftlabs.net:7922/wrtc/authentication.git",
     "templatizer": "1.2.1",
     "mocha": "2.1.0",
     "jsdom": "3.1.0",
