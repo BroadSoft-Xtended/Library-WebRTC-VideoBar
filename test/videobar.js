@@ -210,6 +210,15 @@ describe('videobar', function() {
   it('hangup', function() {
     testUA.isVisible(videobarview.hangup, false);
   });
+  it('hangup on incoming call:', function() {
+    sipstack.enableAutoAnswer = false;
+    testUA.connect();
+    var session = testUA.incomingSession();
+    testUA.incomingCall(session);
+    testUA.isVisible(videobarview.hangup, true);
+    videobarview.hangup.trigger('click');
+    testUA.isVisible(videobarview.hangup, false);
+  });
   it('muteAudio on call started', function() {
     testUA.connectAndStartCall();
     testUA.isVisible(videobarview.mute, true);
