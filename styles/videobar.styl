@@ -172,11 +172,7 @@
   .videoBar.enableCallControl.callcontrol-shown .dialpadHide,
   .videoBar.enableCallControl:not(.callcontrol-shown) .dialpadShow,
   .videoBar.enableFullscreen:not(.fullscreen-shown) .fullscreenExpand,
-  .videoBar.enableFullscreen.fullscreen-shown .fullscreenContract,
-  .videoBar.enableMute:not(.muted).started .mute,
-  .videoBar.enableMute.muted.started .unmute,
-  .videoBar.enableScreenshare:not(.screenshare-shown) .screenshareStart,
-  .videoBar.enableScreenshare.screenshare-shown .screenshareStop
+  .videoBar.enableFullscreen.fullscreen-shown .fullscreenContract
     {fadeIn}
 
   .videoBar.connected .hangup, 
@@ -193,22 +189,14 @@
   .videoBar.enableCallControl:not(.callcontrol-shown) .dialpadHide,
   .videoBar.enableCallControl.callcontrol-shown .dialpadShow,
   .videoBar.enableFullscreen.fullscreen-shown .fullscreenExpand,
-  .videoBar.enableFullscreen:not(.fullscreen-shown) .fullscreenContract,
-  .videoBar.enableScreenshare.screenshare-shown .screenshareStart, 
-  .videoBar.enableScreenshare:not(.screenshare-shown) .screenshareStop,
-  .videoBar.enableMute:not(.started) .mute, 
-  .videoBar.enableMute:not(.started) .unmute,
-  .videoBar.enableMute.muted.started .mute, 
-  .videoBar.enableMute:not(.muted).started .unmute
+  .videoBar.enableFullscreen:not(.fullscreen-shown) .fullscreenContract
     {fadeOut}  
 
-  .videoBar:not(.enableMute) .cell-muteAudio,
   .videoBar:not(.enableTransfer) .cell-transfer,
   .videoBar:not(.enableHold) .cell-hold,
   .videoBar:not(.enableCallTimer) .cell-timer,
   .videoBar:not(.enableFullscreen) .cell-fullScreen,
   .videoBar:not(.enableSelfView) .cell-selfView,
   .videoBar:not(.enableSettings) .cell-settings,
-  .videoBar:not(.enableCallControl) .cell-dialpad,
-  .videoBar:not(.enableScreenshare) .cell-screenshareStart
+  .videoBar:not(.enableCallControl) .cell-dialpad
     display none !important

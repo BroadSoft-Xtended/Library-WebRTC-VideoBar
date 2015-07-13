@@ -8,7 +8,9 @@ describe('videobar', function() {
     core = require('webrtc-core');
     testUA = core.testUA;
     ExSIP = core.exsip;
-    testUA.createCore('sipstack');
+    testUA.createModelAndView('sipstack', {
+      sipstack: require('webrtc-sipstack')
+    });
     testUA.mockWebRTC();
     testUA.createModelAndView('videobar', {
       videobar: require('../'),
@@ -18,10 +20,12 @@ describe('videobar', function() {
       video: require('webrtc-video'),
       transfer: require('webrtc-transfer'),
       messages: require('webrtc-messages'),
-      authentication: require('webrtc-authentication')
+      authentication: require('webrtc-authentication'),
+      sipstack: require('webrtc-sipstack'),
+      audio: require('webrtc-audio'),
+      sound: require('webrtc-sound'),
+      fullscreen: require('webrtc-fullscreen')
     });
-    screenshare = bdsft_client_instances.test.screenshare;
-    fullscreen = bdsft_client_instances.test.fullscreen;
     callcontrol = bdsft_client_instances.test.callcontrol;
     urlconfig = bdsft_client_instances.test.urlconfig;
     transfer = bdsft_client_instances.test.transfer;
@@ -29,36 +33,6 @@ describe('videobar', function() {
     settings = bdsft_client_instances.test.settings;
   });
 
-  it('fullscreen', function() {
-    testUA.isVisible(videobarview.fullscreenExpand, true);
-    testUA.isVisible(videobarview.fullscreenContract, false);
-
-    videobarview.fullscreenExpand.trigger('click');
-    testUA.isVisible(videobarview.fullscreenExpand, false);
-    testUA.isVisible(videobarview.fullscreenContract, true);
-    expect(videobar.classes.indexOf('fullscreen-shown')).toNotEqual(-1);
-
-    videobarview.fullscreenContract.trigger('click');
-    testUA.isVisible(videobarview.fullscreenExpand, true);
-    testUA.isVisible(videobarview.fullscreenContract, false);
-    expect(videobar.classes.indexOf('fullscreen-hidden')).toNotEqual(-1);
-  });
-  it('screenshare', function() {
-    screenshare.enableScreenshare = true;
-    testUA.isVisible(videobarview.screenshareStart, true);
-    testUA.isVisible(videobarview.screenshareStop, false);
-
-    videobarview.screenshareStart.trigger('click');
-    testUA.isVisible(videobarview.screenshareStart, false);
-    testUA.isVisible(videobarview.screenshareStop, true);
-    expect(videobar.classes.indexOf('screenshare-shown')).toNotEqual(-1);
-
-    videobarview.screenshareStop.trigger('click');
-    testUA.isVisible(videobarview.screenshareStart, true);
-    testUA.isVisible(videobarview.screenshareStop, false);
-    expect(videobar.classes.indexOf('screenshare-hidden')).toNotEqual(-1);
-    screenshare.enableScreenshare = false;
-  });
   it('with audioOnly', function() {
     urlconfig.view = 'audioOnly';
     expect(videobar.classes.indexOf('audioOnly')).toNotEqual(-1);
@@ -147,7 +121,6 @@ describe('videobar', function() {
     testUA.isVisible(videobarview.resume.element, false);
     session.held();
     testUA.isVisible(videobarview.hangup, true);
-    testUA.isVisible(videobarview.mute, true);
     expect(videobarview.resume.disabled).toEqual(false);
     expect(videobarview.hold.disabled).toEqual(false);
     testUA.isVisible(videobarview.hold.element, false);
@@ -201,12 +174,6 @@ describe('videobar', function() {
     settings.enableSettings = false;
     testUA.isVisible(videobarview.settings, false);
   });  
-  it('muteAudio', function() {
-    testUA.isVisible(videobarview.mute, false);
-  });
-  it('unmuteAudio', function() {
-    testUA.isVisible(videobarview.unmute, false);
-  });
   it('hangup', function() {
     testUA.isVisible(videobarview.hangup, false);
   });
@@ -218,40 +185,6 @@ describe('videobar', function() {
     testUA.isVisible(videobarview.hangup, true);
     videobarview.hangup.trigger('click');
     testUA.isVisible(videobarview.hangup, false);
-  });
-  it('muteAudio on call started', function() {
-    testUA.connectAndStartCall();
-    testUA.isVisible(videobarview.mute, true);
-    testUA.endCall();
-  });
-  it('muteAudio on mute triggered', function() {
-    testUA.connectAndStartCall();
-    videobarview.mute.trigger("click");
-    testUA.isVisible(videobarview.mute, false);
-    testUA.isVisible(videobarview.unmute, true);
-    videobarview.unmute.trigger("click");
-    testUA.isVisible(videobarview.unmute, false);
-    testUA.isVisible(videobarview.mute, true);
-    testUA.endCall();
-  });
-  it('fullScreen icon', function() {
-    fullscreen.enableFullscreen = true;
-    testUA.isVisible(videobarview.fullscreenExpand, true);
-    testUA.isVisible(videobarview.fullscreenContract, false);
-  });
-  it('fullScreen icon with enableFullScreen = false', function() {
-    fullscreen.enableFullscreen = false;
-    testUA.isVisible(videobarview.fullscreenExpand, false);
-    testUA.isVisible(videobarview.fullscreenContract, false);
-  });
-  it('fullScreen icon after click', function() {
-    fullscreen.enableFullscreen = true;
-    videobarview.fullscreenExpand.trigger('click');
-    testUA.isVisible(videobarview.fullscreenExpand, false);
-    testUA.isVisible(videobarview.fullscreenContract, true);
-    videobarview.fullscreenContract.trigger('click');
-    testUA.isVisible(videobarview.fullscreenExpand, true);
-    testUA.isVisible(videobarview.fullscreenContract, false);
   });
   it('selfView icon', function() {
     video.enableSelfView = true;
@@ -297,41 +230,7 @@ describe('videobar', function() {
     testUA.isVisible(videobarview.hangup, true);
     testUA.endCall();
   });
-  it('muteAudio on call started and disabled muted', function() {
-    videobar.enableMute = false;
-    testUA.connectAndStartCall();
-    testUA.isVisible(videobarview.mute, false);
-    testUA.endCall();
-  });
-  it('unmuteAudio on call started and disabled muted', function() {
-    videobar.enableMute = false;
-    testUA.connectAndStartCall();
-    testUA.isVisible(videobarview.unmute, false);
-    testUA.endCall();
-  });
-  it('muteAudio on call ended', function() {
-    videobar.enableMute = true;
-    testUA.connectAndStartCall();
-    testUA.endCall();
-    testUA.isVisible(videobarview.mute, false);
-  });
-  it('unmuteAudio on call ended', function() {
-    videobar.enableMute = true;
-    testUA.isVisible(videobarview.mute, false);
-    testUA.isVisible(videobarview.unmute, false);
-    testUA.connectAndStartCall();
-    testUA.isVisible(videobarview.mute, true);
-    testUA.isVisible(videobarview.unmute, false);
-    videobarview.mute.trigger("click");
-    testUA.isVisible(videobarview.unmute, true);
-    testUA.isVisible(videobarview.mute, false);
-    testUA.endCall();
-    expect(sipstack.getCallState()).toEqual("connected");
-    testUA.isVisible(videobarview.mute, false);
-    testUA.isVisible(videobarview.unmute, false);
-  });
   it('hangup on call ended', function() {
-    videobar.enableMute = true;
     testUA.connectAndStartCall();
     testUA.endCall();
     testUA.isVisible(videobarview.hangup, false);
