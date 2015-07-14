@@ -4,7 +4,7 @@ Displays a video bar with mute, hold, fullscreen, dialpad, settings, self view a
 
 Model : bdsft_webrtc.default.videobar
 View : bdsft_webrtc.default.videobarview
-Dependencies : [Audio](../audio), [Authentication](../authentication), [Call Control](../callcontrol), [Fullscreen](../fullscreen), [SIP Stack](../sipstack), [Sound](../sound), [Timer](../timer), [Transfer](../transfer), [Video](../video)
+Dependencies : [Audio](https://github.com/BroadSoft-Xtended/Library-WebRTC-Audio), [Authentication](https://github.com/BroadSoft-Xtended/Library-WebRTC-Authentication), [Call Control](https://github.com/BroadSoft-Xtended/Library-WebRTC-CallControl), [Fullscreen](../fullscreen), [SIP Stack](https://github.com/BroadSoft-Xtended/Library-WebRTC-SIPStack), [Sound](https://github.com/BroadSoft-Xtended/Library-WebRTC-Sound), [Timer](https://github.com/BroadSoft-Xtended/Library-WebRTC-Timer), [Transfer](https://github.com/BroadSoft-Xtended/Library-WebRTC-Transfer), [Video](https://github.com/BroadSoft-Xtended/Library-WebRTC-Video)
 
 ## Elements
 <a name="elements"></a>
