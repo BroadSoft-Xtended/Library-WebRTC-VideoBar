@@ -173,9 +173,7 @@
   .videoBar.enableSelfView.video-hidden .selfViewShow,
   .videoBar.enableTransfer.started .transfer,
   .videoBar.enableCallControl.callcontrol-shown .dialpadHide,
-  .videoBar.enableCallControl:not(.callcontrol-shown) .dialpadShow,
-  .videoBar.enableFullscreen:not(.fullscreen-shown) .fullscreenExpand,
-  .videoBar.enableFullscreen.fullscreen-shown .fullscreenContract
+  .videoBar.enableCallControl:not(.callcontrol-shown) .dialpadShow
     {fadeIn}
 
   .videoBar.connected .hangup, 
@@ -190,9 +188,7 @@
   .videoBar.enableTransfer.connected .transfer, 
   .videoBar.enableTransfer.disconnected .transfer,
   .videoBar.enableCallControl:not(.callcontrol-shown) .dialpadHide,
-  .videoBar.enableCallControl.callcontrol-shown .dialpadShow,
-  .videoBar.enableFullscreen.fullscreen-shown .fullscreenExpand,
-  .videoBar.enableFullscreen:not(.fullscreen-shown) .fullscreenContract
+  .videoBar.enableCallControl.callcontrol-shown .dialpadShow
     {fadeOut}  
 
   .videoBar:not(.enableTransfer) .cell-transfer,
@@ -201,5 +197,8 @@
   .videoBar:not(.enableFullscreen) .cell-fullScreen,
   .videoBar:not(.enableSelfView) .cell-selfView,
   .videoBar:not(.enableSettings) .cell-settings,
-  .videoBar:not(.enableCallControl) .cell-dialpad
+  .videoBar:not(.enableCallControl) .cell-dialpad,
+  .videoBar:not(.enableMute) .muteHolder,
+  .videoBar:not(.enableCallTimer) .timerHolder,
+  .videoBar:not(.enableFullscreen) .fullscreenHolder
     display none !important
