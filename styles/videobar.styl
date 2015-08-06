@@ -152,10 +152,7 @@
 
   .videoBar.audioOnly .fullscreenExpand, 
   .videoBar.audioOnly .fullscreenContract,
-  .videoBar.audioOnly .selfViewHide, 
-  .videoBar.audioOnly .selfViewShow, 
-  .videoBar.audioOnly .fullscreenHolder, 
-  .videoBar.audioOnly .cell-selfView
+  .videoBar.audioOnly .fullscreenHolder
     display none !important
 
   .videoBar.selfViewShow a, 
@@ -169,8 +166,8 @@
   .videoBar:not(.held).enableHold.started .hold,
   .videoBar.enableHold.held .resume,
   .videoBar.enableSettings .settings,
-  .videoBar.enableSelfView:not(.video-hidden) .selfViewHide,
-  .videoBar.enableSelfView.video-hidden .selfViewShow,
+  .videoBar.enableSelfView:not(.audioOnly) .selfViewHide,
+  .videoBar.enableSelfView.audioOnly .selfViewShow,
   .videoBar.enableTransfer.started .transfer,
   .videoBar.enableCallControl.callcontrol-shown .dialpadHide,
   .videoBar.enableCallControl:not(.callcontrol-shown) .dialpadShow
@@ -183,8 +180,8 @@
   .videoBar:not(.started) .resume,
   .videoBar:not(.held) .resume, 
   .videoBar:not(.enableSettings) .settings,
-  .videoBar.enableSelfView.video-hidden .selfViewHide,
-  .videoBar.enableSelfView:not(.video-hidden) .selfViewShow,
+  .videoBar.enableSelfView.audioOnly .selfViewHide,
+  .videoBar.enableSelfView:not(.audioOnly) .selfViewShow,
   .videoBar.enableTransfer.connected .transfer, 
   .videoBar.enableTransfer.disconnected .transfer,
   .videoBar.enableCallControl:not(.callcontrol-shown) .dialpadHide,
