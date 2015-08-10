@@ -2,12 +2,15 @@ test = require('../node_modules/webrtc-sipstack/test/includes/common')(require('
 describe('videobar', function() {
 
   before(function() {
+    test.setupLocalStorage();
     test.createModelAndView('sipstack', {
       sipstack: require('webrtc-sipstack')
     });
     test.createModelAndView('videobar', {
       videobar: require('../'),
       timer: require('webrtc-timer'),
+      history: require('webrtc-history'),
+      stats: require('webrtc-stats'),
       callcontrol: require('webrtc-callcontrol'),
       settings: require('webrtc-settings'),
       video: require('webrtc-video'),

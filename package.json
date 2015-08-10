@@ -13,6 +13,8 @@
     "webrtc-timer": "BroadSoft-Xtended/Library-WebRTC-Timer.git",
     "webrtc-video": "BroadSoft-Xtended/Library-WebRTC-CallControl.git",
     "webrtc-callcontrol": "BroadSoft-Xtended/Library-WebRTC-Video.git",
+    "webrtc-history": "BroadSoft-Xtended/Library-WebRTC-History.git",
+    "webrtc-stats": "BroadSoft-Xtended/Library-WebRTC-Stats.git",
     "webrtc-settings": "BroadSoft-Xtended/Library-WebRTC-Settings.git",
     "webrtc-messages": "BroadSoft-Xtended/Library-WebRTC-Messages.git",
     "webrtc-authentication": "BroadSoft-Xtended/Library-WebRTC-Authentication.git",

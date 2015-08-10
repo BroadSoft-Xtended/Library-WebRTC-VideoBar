@@ -77,124 +77,120 @@
     &._1920x1080
       width 1920px
 
-  .hangup, .fullScreen, .selfView, .mute, .dialpadIcon, .messages
-    top 0
-    left 0
+    .hangup, .fullScreen, .selfView, .mute, .dialpadIcon, .messages
+      top 0
+      left 0
 
-  #videoBar
-    #settings
+    &.audioOnly:not(.offerToReceiveVideo)
+      display inline-block
       width auto
-      background-color transparent
-
-  .videoBar.audioOnly
-    display inline-block
-    width auto
-    
-  .videoBar.audioOnly
-    .table
-      table-layout auto
-      width auto
-    .cell-hangup
-      width 35px !important
       
-  .videoBar.conference
-    .cell-hangup
-      width 30px !important
-      top 2px
-    .cell
-      .hangup
-        margin-top 0
-        width 140px
-        background-color red
-        border-radius 5px
-        margin-left 10px
-        height 36px
-        line-height 14px
-    .hangup
-      .subtitle
-        display block !important
-        font-size 14px
-        color white
-
+    &.audioOnly:not(.offerToReceiveVideo)
+      .table
+        table-layout auto
+        width auto
+      .cell-hangup
+        width 35px !important
         
-  .videoBar .icon, .videoBar a
-    font-size 20px
-    color grey
-    text-decoration none
+    &.conference
+      .cell-hangup
+        width 30px !important
+        top 2px
+      .cell
+        .hangup
+          margin-top 0
+          width 140px
+          background-color red
+          border-radius 5px
+          margin-left 10px
+          height 36px
+          line-height 14px
+      .hangup
+        .subtitle
+          display block !important
+          font-size 14px
+          color white
 
-  .videoBar .hold, .videoBar .resume
-    margin-top -1px
+    & .icon
+    & a
+      font-size 20px
+      color grey
+      text-decoration none
 
-  .videoBar .settings
-    margin-top 12px !important
-    .icon-settings
-      margin 0
-      font-size 18px
-      color #FFF
+    & .hold
+    & .resume
+      margin-top -1px
 
-  .videoBar.fullscreen-shown
-    top auto !important
-    bottom 0px
-    position absolute
-    width 100%
+    & .settings
+      margin-top 12px !important
+      .icon-settings
+        margin 0
+        font-size 18px
+        color #FFF
 
-  .videoBar.conference .icon-hangup:before, 
-  .videoBar.conference .icon-hangup:hover:before
-    color white !important
+    &.fullscreen-shown
+      top auto !important
+      bottom 0px
+      position absolute
+      width 100%
 
-  .videoBar.conference .selfViewHide, 
-  .videoBar.conference .selfViewShow
-    text-align right !important
+    &.conference .icon-hangup:before
+    &.conference .icon-hangup:hover:before
+      color white !important
 
-  .videoBar.conference .fullscreenExpand, 
-  .videoBar.conference .fullscreenContract
-    text-align left !important
+    &.conference .selfViewHide
+    &.conference .selfViewShow
+      text-align right !important
 
-  .videoBar.audioOnly .fullscreenExpand, 
-  .videoBar.audioOnly .fullscreenContract,
-  .videoBar.audioOnly .fullscreenHolder
-    display none !important
+    &.conference .fullscreenExpand
+    &.conference .fullscreenContract
+      text-align left !important
 
-  .videoBar.selfViewShow a, 
-  .videoBar.dialpadHide a,
-  .videoBar.unmuteAudio a,
-  .videoBar.fullscreenContract a
-    color #04AFF0 !important
+    &.audioOnly:not(.offerToReceiveVideo) .fullscreenExpand
+    &.audioOnly:not(.offerToReceiveVideo) .fullscreenContract
+    &.audioOnly:not(.offerToReceiveVideo) .fullscreenHolder
+      display none !important
 
-  .videoBar.started .hangup, 
-  .videoBar.calling .hangup
-  .videoBar:not(.held).enableHold.started .hold,
-  .videoBar.enableHold.held .resume,
-  .videoBar.enableSettings .settings,
-  .videoBar.enableSelfView:not(.audioOnly) .selfViewHide,
-  .videoBar.enableSelfView.audioOnly .selfViewShow,
-  .videoBar.enableTransfer.started .transfer,
-  .videoBar.enableCallControl.callcontrol-shown .dialpadHide,
-  .videoBar.enableCallControl:not(.callcontrol-shown) .dialpadShow
-    {fadeIn}
+    &.selfViewShow a
+    &.dialpadHide a
+    &.unmuteAudio a
+    &.fullscreenContract a
+      color #04AFF0 !important
 
-  .videoBar.connected .hangup, 
-  .videoBar.disconnected .hangup,
-  .videoBar.held .hold, 
-  .videoBar:not(.started) .hold,
-  .videoBar:not(.started) .resume,
-  .videoBar:not(.held) .resume, 
-  .videoBar:not(.enableSettings) .settings,
-  .videoBar.enableSelfView.audioOnly .selfViewHide,
-  .videoBar.enableSelfView:not(.audioOnly) .selfViewShow,
-  .videoBar.enableTransfer.connected .transfer, 
-  .videoBar.enableTransfer.disconnected .transfer,
-  .videoBar.enableCallControl:not(.callcontrol-shown) .dialpadHide,
-  .videoBar.enableCallControl.callcontrol-shown .dialpadShow
-    {fadeOut}  
+    &.started .hangup, 
+    &.calling .hangup
+    &:not(.held).enableHold.started .hold,
+    &.enableHold.held .resume,
+    &.enableSettings .settings,
+    &.enableSelfView:not(.showLocal) .selfViewShow,
+    &.enableSelfView.showLocal .selfViewHide,
+    &.enableTransfer.started .transfer,
+    &.enableCallControl.callcontrol-shown .dialpadHide,
+    &.enableCallControl:not(.callcontrol-shown) .dialpadShow
+      {fadeIn}
 
-  .videoBar:not(.enableTransfer) .cell-transfer,
-  .videoBar:not(.enableHold) .cell-hold,
-  .videoBar:not(.enableCallTimer) .cell-timer,
-  .videoBar:not(.enableSelfView) .cell-selfView,
-  .videoBar:not(.enableSettings) .cell-settings,
-  .videoBar:not(.enableCallControl) .cell-dialpad,
-  .videoBar:not(.enableMute) .muteHolder,
-  .videoBar:not(.enableCallTimer) .timerHolder,
-  .videoBar:not(.enableFullscreen) .fullscreenHolder
-    display none !important
+    &.connected .hangup, 
+    &.disconnected .hangup,
+    &.held .hold, 
+    &:not(.started) .hold,
+    &:not(.started) .resume,
+    &:not(.held) .resume, 
+    &:not(.enableSettings) .settings,
+    &.enableSelfView.showLocal .selfViewShow,
+    &.enableSelfView:not(.showLocal) .selfViewHide,
+    &.enableTransfer.connected .transfer, 
+    &.enableTransfer.disconnected .transfer,
+    &.enableCallControl:not(.callcontrol-shown) .dialpadHide,
+    &.enableCallControl.callcontrol-shown .dialpadShow
+      {fadeOut}  
+
+    &:not(.enableTransfer) .cell-transfer,
+    &:not(.enableHold) .cell-hold,
+    &:not(.enableCallTimer) .cell-timer,
+    &:not(.enableSelfView) .cell-selfView,
+    &:not(.enableSettings) .cell-settings,
+    &:not(.enableCallControl) .cell-dialpad,
+    &:not(.enableMute) .muteHolder,
+    &:not(.enableCallTimer) .timerHolder,
+    &:not(.enableFullscreen) .fullscreenHolder
+      display none !important
