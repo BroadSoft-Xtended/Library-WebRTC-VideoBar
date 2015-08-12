@@ -23,6 +23,8 @@
     "webrtc-sound": "BroadSoft-Xtended/Library-WebRTC-Sound.git",
     "webrtc-fullscreen": "BroadSoft-Xtended/Library-WebRTC-FullScreen.git",
     "webrtc-transfer": "BroadSoft-Xtended/Library-WebRTC-Transfer.git",
+    "webrtc-xmpp": "BroadSoft-Xtended/Library-WebRTC-XMPP.git",
+    "webrtc-dms": "BroadSoft-Xtended/Library-WebRTC-DMS.git",
     "templatizer": "1.2.1",
     "mocha": "2.1.0",
     "jsdom": "3.1.0",
