@@ -6,7 +6,7 @@ Model : bdsft_webrtc.default.videobar
 
 View : bdsft_webrtc.default.videobarview
 
-Dependencies : [Audio](https://github.com/BroadSoft-Xtended/Library-WebRTC-Audio), [Authentication](https://github.com/BroadSoft-Xtended/Library-WebRTC-Authentication), [Call Control](https://github.com/BroadSoft-Xtended/Library-WebRTC-CallControl), [Fullscreen](https://github.com/BroadSoft-Xtended/Library-WebRTC-FullScreen), [SIP Stack](https://github.com/BroadSoft-Xtended/Library-WebRTC-SIPStack), [Sound](https://github.com/BroadSoft-Xtended/Library-WebRTC-Sound), [Timer](https://github.com/BroadSoft-Xtended/Library-WebRTC-Timer), [Transfer](https://github.com/BroadSoft-Xtended/Library-WebRTC-Transfer), [Video](https://github.com/BroadSoft-Xtended/Library-WebRTC-Video)
+Dependencies : [Audio](https://github.com/BroadSoft-Xtended/Library-WebRTC-Audio), [Authentication](https://github.com/BroadSoft-Xtended/Library-WebRTC-Authentication), [Call Control](https://github.com/BroadSoft-Xtended/Library-WebRTC-CallControl), [DMS](https://github.com/BroadSoft-Xtended/Library-WebRTC-DMS), [Fullscreen](https://github.com/BroadSoft-Xtended/Library-WebRTC-FullScreen), [SIP Stack](https://github.com/BroadSoft-Xtended/Library-WebRTC-SIPStack), [Sound](https://github.com/BroadSoft-Xtended/Library-WebRTC-Sound), [Timer](https://github.com/BroadSoft-Xtended/Library-WebRTC-Timer), [Transfer](https://github.com/BroadSoft-Xtended/Library-WebRTC-Transfer), [Video](https://github.com/BroadSoft-Xtended/Library-WebRTC-Video), [XMPP](https://github.com/BroadSoft-Xtended/Library-WebRTC-XMPP)
 
 ## Elements
 <a name="elements"></a>
@@ -25,6 +25,7 @@ selfViewShow         |div   |Shows the self view.
 settings             |div   |Shows the settings view.
 timerHolder          |div   |Holds the timer view.
 transfer             |div   |Shows the transfer view.
+xmppHolder		     |div   |Holds the xmpp toggling icon.
 
 ## Configuration
 <a name="configuration"></a>

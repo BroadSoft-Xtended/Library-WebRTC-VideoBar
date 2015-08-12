@@ -2,12 +2,15 @@ test = require('../node_modules/webrtc-sipstack/test/includes/common')(require('
 describe('videobar', function() {
 
   before(function() {
+    test.setupLocalStorage();
     test.createModelAndView('sipstack', {
       sipstack: require('webrtc-sipstack')
     });
     test.createModelAndView('videobar', {
       videobar: require('../'),
       timer: require('webrtc-timer'),
+      history: require('webrtc-history'),
+      stats: require('webrtc-stats'),
       callcontrol: require('webrtc-callcontrol'),
       settings: require('webrtc-settings'),
       video: require('webrtc-video'),
@@ -17,7 +20,9 @@ describe('videobar', function() {
       sipstack: require('webrtc-sipstack'),
       audio: require('webrtc-audio'),
       sound: require('webrtc-sound'),
-      fullscreen: require('webrtc-fullscreen')
+      fullscreen: require('webrtc-fullscreen'),
+      xmpp: require('webrtc-xmpp'),
+      dms: require('webrtc-dms')
     });
     callcontrol = bdsft_client_instances.test.callcontrol;
     urlconfig = bdsft_client_instances.test.urlconfig;
