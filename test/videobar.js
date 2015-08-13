@@ -24,11 +24,11 @@ describe('videobar', function() {
       xmpp: require('webrtc-xmpp'),
       dms: require('webrtc-dms')
     });
-    callcontrol = bdsft_client_instances.test.callcontrol;
-    urlconfig = bdsft_client_instances.test.urlconfig;
-    transfer = bdsft_client_instances.test.transfer;
-    video = bdsft_client_instances.test.video;
-    settings = bdsft_client_instances.test.settings;
+    callcontrol = bdsft_client_instances.test.callcontrol.callcontrol;
+    urlconfig = bdsft_client_instances.test.core.urlconfig;
+    transfer = bdsft_client_instances.test.transfer.transfer;
+    video = bdsft_client_instances.test.video.video;
+    settings = bdsft_client_instances.test.settings.settings;
   });
 
   it('with audioOnly', function() {
