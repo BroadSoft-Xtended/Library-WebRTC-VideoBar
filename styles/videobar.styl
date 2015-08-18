@@ -155,10 +155,20 @@
     &.fullscreenContract a
       color #04AFF0 !important
 
+    &:not(.held).enableHold.started .hold,
+    &.enableHold.held .resume
+      display block
+      opacity 1
+      z-index 20
+      
+    &.held .hold, 
+    &:not(.started) .hold,
+    &:not(.started) .resume,
+    &:not(.held) .resume
+      display none
+
     &.started .hangup, 
     &.calling .hangup
-    &:not(.held).enableHold.started .hold,
-    &.enableHold.held .resume,
     &.enableSettings .settings,
     &.enableSelfView:not(.showLocal) .selfViewShow,
     &.enableSelfView.showLocal .selfViewHide,
@@ -169,10 +179,6 @@
 
     &.connected .hangup, 
     &.disconnected .hangup,
-    &.held .hold, 
-    &:not(.started) .hold,
-    &:not(.started) .resume,
-    &:not(.held) .resume, 
     &:not(.enableSettings) .settings,
     &.enableSelfView.showLocal .selfViewShow,
     &.enableSelfView:not(.showLocal) .selfViewHide,
