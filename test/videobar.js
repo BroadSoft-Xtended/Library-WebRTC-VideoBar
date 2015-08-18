@@ -33,7 +33,7 @@ describe('videobar', function() {
 
   it('with audioOnly', function() {
     urlconfig.view = 'audioOnly';
-    expect(videobar.classes.indexOf('audioOnly')).toNotEqual(-1);
+    expect(videobar.classes.indexOf('sendVideo')).toEqual(-1);
     urlconfig.view = '';
   });
   it('hold icon:', function() {

@@ -81,11 +81,11 @@
       top 0
       left 0
 
-    &.audioOnly:not(.offerToReceiveVideo)
+    &:not(.sendVideo):not(.receiveVideo)
       display inline-block
       width auto
       
-    &.audioOnly:not(.offerToReceiveVideo)
+    &:not(.sendVideo):not(.receiveVideo)
       .table
         table-layout auto
         width auto
@@ -146,9 +146,7 @@
     &.conference .fullscreenContract
       text-align left !important
 
-    &.audioOnly:not(.offerToReceiveVideo) .fullscreenExpand
-    &.audioOnly:not(.offerToReceiveVideo) .fullscreenContract
-    &.audioOnly:not(.offerToReceiveVideo) .fullscreenHolder
+    &:not(.sendVideo):not(.receiveVideo) .fullscreenHolder
       display none !important
 
     &.selfViewShow a
