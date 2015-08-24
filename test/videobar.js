@@ -22,7 +22,8 @@ describe('videobar', function() {
       sound: require('webrtc-sound'),
       fullscreen: require('webrtc-fullscreen'),
       xmpp: require('webrtc-xmpp'),
-      dms: require('webrtc-dms')
+      dms: require('webrtc-dms'),
+      xsi: require('webrtc-xsi')
     });
     callcontrol = bdsft_client_instances.test.callcontrol.callcontrol;
     urlconfig = bdsft_client_instances.test.core.urlconfig;
