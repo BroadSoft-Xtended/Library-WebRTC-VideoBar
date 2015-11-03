@@ -1,11 +1,8 @@
-test = require('../node_modules/webrtc-sipstack/test/includes/common')(require('../node_modules/webrtc-core/test/includes/common'));
+test = require('../node_modules/webrtc-sipstack/test/includes/common')(require('../node_modules/bdsft-sdk-test/lib/common'));
 describe('videobar', function() {
 
   before(function() {
     test.setupLocalStorage();
-    test.createModelAndView('sipstack', {
-      sipstack: require('webrtc-sipstack')
-    });
     test.createModelAndView('videobar', {
       videobar: require('../'),
       timer: require('webrtc-timer'),
@@ -22,13 +19,18 @@ describe('videobar', function() {
       sound: require('webrtc-sound'),
       fullscreen: require('webrtc-fullscreen'),
       xmpp: require('webrtc-xmpp'),
+      core: require('webrtc-core'),
       dms: require('webrtc-dms'),
-      xsi: require('webrtc-xsi')
+      request: require('bdsft-sdk-request'),
+      xsi: require('bdsft-sdk-xsi'),
+      eventbus: require('bdsft-sdk-eventbus'),
+      debug: require('bdsft-sdk-debug')
     });
     callcontrol = bdsft_client_instances.test.callcontrol.callcontrol;
     urlconfig = bdsft_client_instances.test.core.urlconfig;
     transfer = bdsft_client_instances.test.transfer.transfer;
     video = bdsft_client_instances.test.video.video;
+    sipstack = bdsft_client_instances.test.sipstack.sipstack;
     settings = bdsft_client_instances.test.settings.settings;
   });
 
